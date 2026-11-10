@@ -9,6 +9,8 @@
   var DOMENA = 'https://[DOMENA]';
 
   var L = function (pl, en, it) { return { pl: pl, en: en, it: it }; };
+  /* Zdjęcia z banku Unsplash (licencja Unsplash — bezpłatne, także komercyjnie) */
+  var U = function (id, w) { return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + (w || 900) + '&q=72'; };
   var TODO = L('[DO UZUPEŁNIENIA]', '[TO BE COMPLETED]', '[DA COMPLETARE]');
   var todo = function (pl, en, it) {
     return L('[DO UZUPEŁNIENIA: ' + pl + ']', '[TO BE COMPLETED: ' + en + ']', '[DA COMPLETARE: ' + it + ']');
@@ -19,6 +21,7 @@
     ustawienia: {
       domena: DOMENA,
       ga4: '',
+      demo: true,
       jezyki: [
         { kod: 'pl', nazwa: 'Polski', wl: true },
         { kod: 'en', nazwa: 'English', wl: true },
@@ -49,9 +52,9 @@
       stopkaHaslo: L('', '', '')
     },
     slajdy: [
-      { id: 'sl1', src: '', alt: L('rzeźba antyczna i rzymskie arkady w ciepłych, kamiennych tonach — motyw kultury i podróży',
-          'classical sculpture and Roman arcades in warm stone tones — a culture and travel motif',
-          'scultura classica e arcate romane in toni caldi di pietra — un motivo di cultura e viaggio') }
+      { id: 'sl1', src: 'img/hero-dawid-koloseum.webp', kolaz: true, alt: L('Kolaż: głowa rzeźby Dawida i rzymskie Koloseum na śliwkowym kole, z odręcznym napisem „Język. Kultura. Ludzie. Perspektywy.”',
+          'Collage: the head of the statue of David and the Roman Colosseum on a plum circle, with the handwritten words “Język. Kultura. Ludzie. Perspektywy.”',
+          'Collage: la testa della statua del David e il Colosseo su un cerchio color prugna, con la scritta a mano «Język. Kultura. Ludzie. Perspektywy.»') }
     ],
     atuty: [
       { id: 'at1', ikona: 'laptop', tytul: L('Online, na żywo', 'Online, live', 'Online, dal vivo'), opis: L('Lekcje z lektorem', 'Lessons with a teacher', 'Lezioni con insegnante') },
@@ -98,49 +101,61 @@
         tytul: L('Opinie klientów', 'Client reviews', 'Recensioni dei clienti'), wstep: L('', '', '') },
       { id: 'faq', wid: true, menu: false, etykieta: L('FAQ', 'FAQ', 'FAQ'),
         tytul: L('Najczęstsze pytania', 'Frequently asked questions', 'Domande frequenti'), wstep: L('', '', '') },
-      { id: 'magazyn', wid: true, menu: true, etykieta: L('Magazyn', 'Journal', 'Magazine'),
-        tytul: L('Magazyn TALQO', 'TALQO Journal', 'TALQO Magazine'),
-        wstep: L('Artykuły, rozmowy i inspiracje ze świata języków, kultury i nowoczesnej edukacji.',
-          'Articles, conversations and inspiration from the world of languages, culture and modern education.',
-          'Articoli, conversazioni e ispirazioni dal mondo delle lingue, della cultura e dell’educazione moderna.') },
+      { id: 'magazyn', wid: true, menu: true, etykieta: L('Journal', 'Journal', 'Journal'),
+        tytul: L('The Art of Learning.', 'The Art of Learning.', 'The Art of Learning.'),
+        wstep: L('TALQO Journal – artykuły, rozmowy i inspiracje ze świata języków, kultury i nowoczesnej edukacji.',
+          'TALQO Journal – articles, conversations and inspiration from the world of languages, culture and modern education.',
+          'TALQO Journal – articoli, conversazioni e ispirazioni dal mondo delle lingue, della cultura e dell’educazione moderna.') },
       { id: 'kontakt', wid: true, menu: true, etykieta: L('Kontakt', 'Contact', 'Contatti'),
         tytul: L('Kontakt i zapytanie o termin', 'Contact and lesson requests', 'Contatti e richiesta di una data'),
         wstep: L('Proszę napisać – oddzwonimy lub odpiszemy.', 'Please write to us – we will call or write back.', 'Ci scriva: La richiameremo o risponderemo per iscritto.') }
     ],
 
-    promocje: [],
+    promocje: [
+      { id: 'pr1', tytul: L('Lekcja próbna ONE za pół ceny', 'Trial ONE lesson at half price', 'Lezione di prova ONE a metà prezzo'),
+        opis: L('Pierwsza lekcja indywidualna dla nowych kursantów z rabatem 50%. Proszę wspomnieć o promocji w formularzu.', 'The first individual lesson for new students with a 50% discount. Please mention the offer in the form.', 'La prima lezione individuale per i nuovi studenti con il 50% di sconto. Indichi la promozione nel modulo.'),
+        plakietka: L('−50%', '−50%', '−50%'), src: '', usluga: 'u-one', pasek: true, od: '2026-11-01', 'do': '2026-12-31', wstrzymana: false }
+    ],
 
     magazyn: [
-      { id: 'mg1', tytul: todo('tytuł pierwszego artykułu', 'title of the first article', 'titolo del primo articolo'),
-        kategoria: L('Kultura', 'Culture', 'Cultura'),
-        tresc: todo('treść artykułu dostarczy szkoła', 'article text to be provided by the school', 'testo dell’articolo fornito dalla scuola'),
-        data: '', src: '', pasek: false, od: '', do: '', wstrzymana: false },
-      { id: 'mg2', tytul: todo('tytuł drugiego artykułu', 'title of the second article', 'titolo del secondo articolo'),
-        kategoria: L('Język w praktyce', 'Language in practice', 'Lingua in pratica'),
-        tresc: todo('treść artykułu dostarczy szkoła', 'article text to be provided by the school', 'testo dell’articolo fornito dalla scuola'),
-        data: '', src: '', pasek: false, od: '', do: '', wstrzymana: false },
-      { id: 'mg3', tytul: todo('tytuł trzeciego artykułu', 'title of the third article', 'titolo del terzo articolo'),
-        kategoria: L('Kariera', 'Career', 'Carriera'),
-        tresc: todo('treść artykułu dostarczy szkoła', 'article text to be provided by the school', 'testo dell’articolo fornito dalla scuola'),
-        data: '', src: '', pasek: false, od: '', do: '', wstrzymana: false }
+      { id: 'mg1', kategoria: L('Kultura', 'Culture', 'Cultura'), data: '2026-11-03', src: U('1758818802493-225ca73fb3c2'), pasek: false, od: '', 'do': '', wstrzymana: false,
+        tytul: L('Londyn z innej perspektywy', 'London from a different perspective', 'Londra da un’altra prospettiva'),
+        tresc: L('Big Ben i czerwone autobusy zna każdy. Język Londynu najlepiej jednak słychać tam, gdzie toczy się codzienne życie.\n\n**Targi.** Na Borough Market wystarczy zapytać „What would you recommend?”, żeby rozmowa potoczyła się sama. Sprzedawcy chętnie opowiadają o tym, co mają na stoisku.\n\n**Muzea.** Stałe wystawy British Museum i Tate Modern są bezpłatne. Opisy eksponatów to gotowe, krótkie teksty do czytania na poziomie B1.\n\n**Spacer.** Trasa wzdłuż South Bank to godzina wśród ulicznych muzyków, księgarzy i rozmów. Warto zapisać trzy zwroty usłyszane po drodze i wykorzystać je na najbliższej lekcji.',
+          'Everyone knows Big Ben and the red buses. But the language of London is best heard where everyday life happens.\n\n**Markets.** At Borough Market, asking “What would you recommend?” is enough to start a conversation. Stallholders are happy to talk about what they sell.\n\n**Museums.** The permanent collections of the British Museum and Tate Modern are free. The exhibit labels are ready-made short reading texts at B1 level.\n\n**A walk.** The South Bank route is an hour among street musicians, booksellers and conversations. Note down three phrases you hear on the way and use them in your next lesson.',
+          'Tutti conoscono il Big Ben e gli autobus rossi. Ma la lingua di Londra si sente meglio dove scorre la vita di ogni giorno.\n\n**Mercati.** Al Borough Market basta chiedere «What would you recommend?» per avviare una conversazione. I venditori raccontano volentieri ciò che hanno sul banco.\n\n**Musei.** Le collezioni permanenti del British Museum e della Tate Modern sono gratuite. Le didascalie sono brevi testi di lettura già pronti, a livello B1.\n\n**Una passeggiata.** Il percorso lungo il South Bank è un’ora tra musicisti di strada, librai e conversazioni. Conviene annotare tre espressioni sentite lungo la strada e usarle alla prossima lezione.') },
+      { id: 'mg2', kategoria: L('Język w praktyce', 'Language in practice', 'Lingua in pratica'), data: '2026-10-20', src: U('1730890754666-fbffee87d65b'), pasek: false, od: '', 'do': '', wstrzymana: false,
+        tytul: L('5 filmów, które pomogą w nauce angielskiego', '5 films that will help you learn English', '5 film che aiutano a imparare l’inglese'),
+        tresc: L('Film uczy rytmu języka lepiej niż lista słówek – pod warunkiem, że ogląda się go aktywnie.\n\n**1. „The King’s Speech”** – wyraźna, staranna brytyjska wymowa.\n**2. „Notting Hill”** – codzienny, potoczny angielski i brytyjski humor.\n**3. „Paddington”** – proste dialogi, dobre na początek także dla młodszych widzów.\n**4. „Forrest Gump”** – spokojne tempo narracji i amerykański akcent.\n**5. „The Social Network”** – szybkie dialogi dla osób na poziomie B2 i wyżej.\n\nJak oglądać? Najpierw z angielskimi napisami, potem ta sama scena bez napisów. Jedna scena dziennie daje więcej niż cały film raz w miesiącu.',
+          'A film teaches the rhythm of a language better than a word list – provided you watch it actively.\n\n**1. “The King’s Speech”** – clear, careful British pronunciation.\n**2. “Notting Hill”** – everyday colloquial English and British humour.\n**3. “Paddington”** – simple dialogue, a good start for younger viewers too.\n**4. “Forrest Gump”** – calm narration and an American accent.\n**5. “The Social Network”** – fast dialogue for B2 level and above.\n\nHow to watch? First with English subtitles, then the same scene without them. One scene a day gives more than a whole film once a month.',
+          'Un film insegna il ritmo della lingua meglio di una lista di vocaboli, a patto di guardarlo in modo attivo.\n\n**1. «The King’s Speech»** – pronuncia britannica chiara e curata.\n**2. «Notting Hill»** – inglese quotidiano e umorismo britannico.\n**3. «Paddington»** – dialoghi semplici, adatti anche ai più giovani.\n**4. «Forrest Gump»** – narrazione lenta e accento americano.\n**5. «The Social Network»** – dialoghi veloci, dal livello B2 in su.\n\nCome guardarli? Prima con i sottotitoli in inglese, poi la stessa scena senza. Una scena al giorno rende più di un film intero una volta al mese.') },
+      { id: 'mg3', kategoria: L('Włochy', 'Italy', 'Italia'), data: '2026-10-06', src: U('1517415465-a8f8ad47bea7'), pasek: false, od: '', 'do': '', wstrzymana: false,
+        tytul: L('Jak zamawiać kawę po włosku (i nie tylko)?', 'How to order coffee in Italian (and more)', 'Come ordinare un caffè in italiano (e non solo)'),
+        tresc: L('We włoskim barze kawa to rytuał, a zamówienie trwa kilka sekund.\n\n**„Un caffè, per favore.”** – to zawsze espresso. O większą, słabszą kawę prosi się słowami *un caffè lungo* albo *un americano*.\n\n**„Al banco o al tavolo?”** – przy barze czy przy stoliku? Kawa wypita na stojąco przy barze jest zwykle tańsza.\n\n**„Un cappuccino e un cornetto.”** – klasyczne włoskie śniadanie. Cappuccino Włosi piją głównie rano.\n\n**„Quant’è?”** – ile płacę? W wielu barach najpierw płaci się w kasie, a z paragonem (*lo scontrino*) podchodzi do baru.\n\nNa koniec wystarczy uśmiech i *grazie, buona giornata!*',
+          'In an Italian bar coffee is a ritual, and ordering takes a few seconds.\n\n**“Un caffè, per favore.”** – that is always an espresso. For a longer, weaker coffee ask for *un caffè lungo* or *un americano*.\n\n**“Al banco o al tavolo?”** – at the bar or at a table? Coffee drunk standing at the bar is usually cheaper.\n\n**“Un cappuccino e un cornetto.”** – the classic Italian breakfast. Italians drink cappuccino mainly in the morning.\n\n**“Quant’è?”** – how much is it? In many bars you pay at the till first and take the receipt (*lo scontrino*) to the counter.\n\nFinish with a smile and *grazie, buona giornata!*',
+          'Al bar italiano il caffè è un rito e l’ordinazione dura pochi secondi.\n\n**«Un caffè, per favore.»** – è sempre un espresso. Per un caffè più lungo e leggero si chiede *un caffè lungo* o *un americano*.\n\n**«Al banco o al tavolo?»** – il caffè bevuto in piedi al banco di solito costa meno.\n\n**«Un cappuccino e un cornetto.»** – la classica colazione italiana. Il cappuccino si beve soprattutto al mattino.\n\n**«Quant’è?»** – in molti bar si paga prima alla cassa e con lo scontrino si va al banco.\n\nPer finire bastano un sorriso e un *grazie, buona giornata!*') },
+      { id: 'mg4', kategoria: L('Kariera', 'Career', 'Carriera'), data: '2026-09-22', src: U('1554072675-66db59dba46f'), pasek: false, od: '', 'do': '', wstrzymana: false,
+        tytul: L('Niemiecki w pracy – praktyczne zwroty', 'German at work – practical phrases', 'Il tedesco al lavoro: frasi pratiche'),
+        tresc: L('W niemieckiej korespondencji służbowej liczą się uprzejmość i konkret. Te zwroty przydają się od pierwszego dnia.\n\n**„Könnten Sie das bitte wiederholen?”** – Czy mógłby Pan / mogłaby Pani powtórzyć?\n\n**„Ich melde mich bis Freitag bei Ihnen.”** – Odezwę się do Państwa do piątku.\n\n**„Vielen Dank für Ihre Rückmeldung.”** – Dziękuję za odpowiedź.\n\n**„Passt Ihnen Dienstag um zehn Uhr?”** – Czy odpowiada Państwu wtorek o dziesiątej?\n\n**„Mit freundlichen Grüßen”** – standardowe zakończenie e-maila.\n\nWarto pamiętać o formie *Sie*: w pracy jest domyślna, dopóki druga strona nie zaproponuje przejścia na *du*.',
+          'In German business correspondence, politeness and precision matter. These phrases are useful from day one.\n\n**“Könnten Sie das bitte wiederholen?”** – Could you repeat that, please?\n\n**“Ich melde mich bis Freitag bei Ihnen.”** – I will get back to you by Friday.\n\n**“Vielen Dank für Ihre Rückmeldung.”** – Thank you for your reply.\n\n**“Passt Ihnen Dienstag um zehn Uhr?”** – Does Tuesday at ten suit you?\n\n**“Mit freundlichen Grüßen”** – the standard e-mail sign-off.\n\nRemember the *Sie* form: at work it is the default until the other person suggests switching to *du*.',
+          'Nella corrispondenza di lavoro in tedesco contano cortesia e concretezza. Queste frasi servono dal primo giorno.\n\n**«Könnten Sie das bitte wiederholen?»** – Potrebbe ripetere, per favore?\n\n**«Ich melde mich bis Freitag bei Ihnen.»** – Le farò sapere entro venerdì.\n\n**«Vielen Dank für Ihre Rückmeldung.»** – Grazie per la Sua risposta.\n\n**«Passt Ihnen Dienstag um zehn Uhr?»** – Le va bene martedì alle dieci?\n\n**«Mit freundlichen Grüßen»** – la formula di chiusura standard di un’e-mail.\n\nAttenzione alla forma *Sie*: al lavoro è quella predefinita finché l’altra persona non propone di passare al *du*.') }
     ],
 
     kursy: [
-      { id: 'k-en', skrot: 'EN', kolor: '#1F4E6B', nazwa: L('Angielski', 'English', 'Inglese'),
-        opis: L('Kurs angielskiego online z lektorem – dla dzieci, młodzieży, dorosłych i firm, także z przygotowaniem do egzaminu ósmoklasisty, matury oraz egzaminów IELTS i Cambridge.\n\n[DO UZUPEŁNIENIA: program kursu i dostępne poziomy]',
-          'Online English with a teacher – for children, teenagers, adults and companies, including preparation for school-leaving exams, IELTS and Cambridge exams.\n\n[TO BE COMPLETED: course programme and available levels]',
-          'Inglese online con insegnante – per bambini, ragazzi, adulti e aziende, anche con preparazione agli esami scolastici, IELTS e Cambridge.\n\n[DA COMPLETARE: programma del corso e livelli disponibili]'),
-        alt: L('londyńska ulica z czerwonym autobusem i wieżą zegarową', 'a London street with a red bus and the clock tower', 'una strada di Londra con autobus rosso e la torre dell’orologio'), src: '' },
-      { id: 'k-de', skrot: 'DE', kolor: '#8A5A0F', nazwa: L('Niemiecki', 'German', 'Tedesco'),
-        opis: L('Kurs niemieckiego online z lektorem – od podstaw po język potrzebny w szkole, na studiach i w pracy.\n\n[DO UZUPEŁNIENIA: program kursu i dostępne poziomy]',
-          'Online German with a teacher – from the basics to the language needed at school, university and work.\n\n[TO BE COMPLETED: course programme and available levels]',
-          'Tedesco online con insegnante – dalle basi alla lingua necessaria a scuola, all’università e al lavoro.\n\n[DA COMPLETARE: programma del corso e livelli disponibili]'),
-        alt: L('Brama Brandenburska w Berlinie o zmierzchu', 'the Brandenburg Gate in Berlin at dusk', 'la Porta di Brandeburgo a Berlino al tramonto'), src: '' },
-      { id: 'k-it', skrot: 'IT', kolor: '#3F6B4A', nazwa: L('Włoski', 'Italian', 'Italiano'),
-        opis: L('Kurs włoskiego online z lektorem – język na co dzień, w podróży i w pracy.\n\n[DO UZUPEŁNIENIA: program kursu i dostępne poziomy]',
-          'Online Italian with a teacher – the language for everyday life, travel and work.\n\n[TO BE COMPLETED: course programme and available levels]',
-          'Italiano online con insegnante – la lingua per la vita quotidiana, i viaggi e il lavoro.\n\n[DA COMPLETARE: programma del corso e livelli disponibili]'),
-        alt: L('filiżanka espresso na stoliku włoskiej kawiarni', 'an espresso cup on an Italian café table', 'una tazzina di espresso sul tavolino di un caffè italiano'), src: '' }
+      { id: 'k-en', skrot: 'EN', flaga: 'gb', kolor: '#1F4E6B', nazwa: L('Angielski', 'English', 'Inglese'), src: U('1742388958169-bf9948d3f268'),
+        opis: L('Kurs angielskiego online z lektorem – dla dzieci, młodzieży, dorosłych i firm, na poziomach od A1 do C1.\n\nProgram łączy rozmowę, słownictwo i gramatykę w sytuacjach z życia: w pracy, w podróży, w szkole. Prowadzimy także przygotowanie do egzaminu ósmoklasisty, matury oraz egzaminów IELTS i Cambridge.',
+          'Online English with a teacher – for children, teenagers, adults and companies, at levels A1 to C1.\n\nThe programme combines conversation, vocabulary and grammar in real-life situations: at work, when travelling, at school. We also prepare students for school-leaving exams, IELTS and Cambridge exams.',
+          'Inglese online con insegnante – per bambini, ragazzi, adulti e aziende, dai livelli A1 a C1.\n\nIl programma unisce conversazione, lessico e grammatica in situazioni reali: al lavoro, in viaggio, a scuola. Prepariamo anche agli esami scolastici, IELTS e Cambridge.'),
+        alt: L('Big Ben i czerwony piętrowy autobus w Londynie', 'Big Ben and a red double-decker bus in London', 'Il Big Ben e un autobus rosso a due piani a Londra') },
+      { id: 'k-de', skrot: 'DE', flaga: 'de', kolor: '#8A5A0F', nazwa: L('Niemiecki', 'German', 'Tedesco'), src: U('1745878136928-d1b3c10afc35'),
+        opis: L('Kurs niemieckiego online z lektorem – od podstaw po język potrzebny w szkole, na studiach i w pracy, na poziomach od A1 do B2.\n\nDużo mówimy od pierwszej lekcji, a gramatykę wprowadzamy tam, gdzie jest potrzebna. Dla osób pracujących z niemieckojęzycznymi klientami przygotowujemy moduł języka biznesowego.',
+          'Online German with a teacher – from the basics to the language needed at school, university and work, at levels A1 to B2.\n\nWe speak a lot from the first lesson and introduce grammar where it is needed. For people working with German-speaking clients we prepare a business language module.',
+          'Tedesco online con insegnante – dalle basi alla lingua necessaria a scuola, all’università e al lavoro, dai livelli A1 a B2.\n\nSi parla molto fin dalla prima lezione e la grammatica arriva dove serve. Per chi lavora con clienti di lingua tedesca prepariamo un modulo di tedesco commerciale.'),
+        alt: L('Brama Brandenburska w Berlinie', 'the Brandenburg Gate in Berlin', 'la Porta di Brandeburgo a Berlino') },
+      { id: 'k-it', skrot: 'IT', flaga: 'it', kolor: '#3F6B4A', nazwa: L('Włoski', 'Italian', 'Italiano'), src: U('1530174883092-c2a7aa3f1cfe'),
+        opis: L('Kurs włoskiego online z lektorem – język na co dzień, w podróży i w pracy, na poziomach od A1 do B2.\n\nUczymy przez rozmowę i kulturę: kuchnię, kino, muzykę. Już po kilku lekcjach można zamówić kawę, zapytać o drogę i przedstawić się po włosku.',
+          'Online Italian with a teacher – the language for everyday life, travel and work, at levels A1 to B2.\n\nWe teach through conversation and culture: food, cinema, music. After just a few lessons you can order a coffee, ask for directions and introduce yourself in Italian.',
+          'Italiano online con insegnante – la lingua per la vita quotidiana, i viaggi e il lavoro, dai livelli A1 a B2.\n\nInsegniamo attraverso la conversazione e la cultura: cucina, cinema, musica. Dopo poche lezioni si può ordinare un caffè, chiedere indicazioni e presentarsi in italiano.'),
+        alt: L('filiżanka espresso na stoliku', 'an espresso cup on a table', 'una tazzina di espresso su un tavolino') }
     ],
     grupy: [
       { id: 'g1', tytul: L('Przedszkolaki', 'Preschool children', 'Bambini in età prescolare'), opis: L('Pierwszy kontakt z językiem obcym w formie dopasowanej do najmłodszych.', 'A first contact with a foreign language in a form suited to the youngest learners.', 'Il primo contatto con una lingua straniera, in una forma adatta ai più piccoli.') },
@@ -156,26 +171,28 @@
     uslugi: [
       { id: 'u-one', nazwa: L('ONE', 'ONE', 'ONE'), podtytul: L('Indywidualnie · 1:1 z lektorem', 'Individual · 1:1 with a teacher', 'Individuale · 1:1 con insegnante'),
         opis: L('Zajęcia jeden na jeden. Program, tempo i tematy dopasowane do Państwa celu i poziomu.', 'One-to-one lessons. Programme, pace and topics tailored to your goal and level.', 'Lezioni individuali. Programma, ritmo e temi su misura per il Suo obiettivo e livello.'),
-        czas: L('', '', ''), cena: L('', '', ''), src: '', plakietka: L('', '', ''), nowosc: false, przycisk: 'rez',
-        alt: L('filiżanka kawy obok otwartego laptopa w porannym świetle', 'a coffee cup next to an open laptop in morning light', 'una tazza di caffè accanto a un portatile aperto nella luce del mattino') },
+        czas: L('60 min', '60 min', '60 min'), cena: L('od 115 zł', 'from PLN 115', 'da 115 PLN'), src: U('1759752393718-7b57f6da3caa'), plakietka: L('', '', ''), nowosc: false, przycisk: 'rez',
+        alt: L('laptop i otwarty notes z długopisem na biurku', 'a laptop and an open notebook with a pen on a desk', 'un portatile e un taccuino aperto con penna sulla scrivania') },
       { id: 'u-duo', nazwa: L('DUO', 'DUO', 'DUO'), podtytul: L('W parze · nauka z bliską osobą', 'In a pair · learn with someone close', 'In coppia · con una persona cara'),
         opis: L('Wspólne lekcje dla dwóch osób – z partnerem, przyjacielem lub członkiem rodziny.', 'Shared lessons for two – with a partner, friend or family member.', 'Lezioni condivise per due persone: con il partner, un amico o un familiare.'),
-        czas: L('', '', ''), cena: L('', '', ''), src: '', plakietka: L('', '', ''), nowosc: false, przycisk: 'rez',
-        alt: L('dwa śliwkowe fotele przy okrągłym stoliku', 'two plum armchairs at a round table', 'due poltrone color prugna a un tavolino rotondo') },
+        czas: L('60 min', '60 min', '60 min'), cena: L('od 75 zł / os.', 'from PLN 75 per person', 'da 75 PLN a persona'), src: U('1760351561007-526f5353cc76'), plakietka: L('', '', ''), nowosc: false, przycisk: 'rez',
+        alt: L('dwie kobiety uczące się razem przy stole z laptopem', 'two women studying together at a table with a laptop', 'due donne che studiano insieme a un tavolo con un portatile') },
       { id: 'u-business', nazwa: L('BUSINESS', 'BUSINESS', 'BUSINESS'), podtytul: L('Dla firm · język w pracy', 'For companies · language at work', 'Per aziende · la lingua al lavoro'),
         opis: L('Kursy dla firm i zespołów. Zakres i terminy ustalamy indywidualnie – proszę wysłać zapytanie ofertowe.', 'Courses for companies and teams. Scope and schedule are agreed individually – please send an enquiry.', 'Corsi per aziende e team. Contenuti e orari si concordano individualmente: ci invii una richiesta.'),
-        czas: L('', '', ''), cena: L('', '', ''), src: '', plakietka: L('', '', ''), nowosc: false, przycisk: 'zap',
-        alt: L('przeszklona fasada nowoczesnego biurowca', 'the glass façade of a modern office building', 'la facciata in vetro di un moderno edificio per uffici') },
+        czas: L('', '', ''), cena: L('wycena indywidualna', 'individual quote', 'preventivo individuale'), src: U('1758691737543-09a1b2b715fa'), plakietka: L('', '', ''), nowosc: false, przycisk: 'zap',
+        alt: L('zespół podczas spotkania w nowoczesnym biurze', 'a team in a meeting in a modern office', 'un team in riunione in un ufficio moderno') },
       { id: 'u-egzaminy', nazwa: L('EGZAMINY', 'EXAMS', 'ESAMI'), podtytul: L('Przygotowanie · IELTS, Cambridge, matura, egzamin ósmoklasisty', 'Preparation · IELTS, Cambridge, matura, eighth-grade exam', 'Preparazione · IELTS, Cambridge, maturità, esame di terza media'),
         opis: L('Zajęcia ukierunkowane na konkretny egzamin i jego wymagania.', 'Lessons focused on a specific exam and its requirements.', 'Lezioni mirate a un esame specifico e ai suoi requisiti.'),
-        czas: L('', '', ''), cena: L('', '', ''), src: '', plakietka: L('', '', ''), nowosc: false, przycisk: 'rez',
-        alt: L('stos podręczników do egzaminów językowych', 'a stack of language exam textbooks', 'una pila di manuali per esami di lingua') }
+        czas: L('60 min', '60 min', '60 min'), cena: L('od 125 zł', 'from PLN 125', 'da 125 PLN'), src: U('1756032433560-56547efed550'), plakietka: L('', '', ''), nowosc: true, przycisk: 'rez',
+        alt: L('osoba ucząca się przy biurku z książkami', 'a person studying at a desk with books', 'una persona che studia alla scrivania con dei libri') }
     ],
 
     metoda: {
-      tekst: todo('opis metody nauczania TALQO — dostarczy szkoła', 'description of the TALQO teaching method — to be provided by the school', 'descrizione del metodo didattico TALQO — fornita dalla scuola'),
-      src: '',
-      alt: L('otwarta książka z fotografią miasta, obok notatnik', 'an open book with a city photograph, next to a notebook', 'un libro aperto con la fotografia di una città, accanto a un taccuino')
+      tekst: L('Uczymy tak, żeby język był narzędziem, a nie przedmiotem szkolnym. Każda lekcja zaczyna się od rozmowy i kończy czymś, co można wykorzystać jeszcze tego samego dnia.\n\nPracujemy na *realnych sytuacjach*: rozmowie o pracę, wiadomości do klienta, zamówieniu w restauracji, prezentacji w szkole. Gramatyka i słownictwo pojawiają się wtedy, gdy są potrzebne – nie odwrotnie.\n\nPo każdych zajęciach otrzymują Państwo krótkie podsumowanie i materiały do samodzielnej powtórki.',
+        'We teach so that language is a tool, not a school subject. Every lesson starts with conversation and ends with something you can use that same day.\n\nWe work on *real situations*: a job interview, a message to a client, ordering in a restaurant, a school presentation. Grammar and vocabulary appear when they are needed – not the other way round.\n\nAfter each lesson you receive a short summary and materials for independent revision.',
+        'Insegniamo in modo che la lingua sia uno strumento, non una materia scolastica. Ogni lezione inizia con la conversazione e finisce con qualcosa da usare il giorno stesso.\n\nLavoriamo su *situazioni reali*: un colloquio di lavoro, un messaggio a un cliente, un’ordinazione al ristorante, una presentazione a scuola. Grammatica e lessico arrivano quando servono, non il contrario.\n\nDopo ogni lezione riceve un breve riepilogo e i materiali per il ripasso individuale.'),
+      src: U('1769794371055-54436b54577e', 1100),
+      alt: L('biurko z otwartą książką, laptopem i materiałami do nauki', 'a desk with an open book, a laptop and study materials', 'una scrivania con un libro aperto, un portatile e materiali di studio')
     },
     filary: [
       { id: 'f1', tytul: L('Lekcje na żywo z lektorem', 'Live lessons with a teacher', 'Lezioni dal vivo con insegnante'), opis: L('Każde zajęcia odbywają się online, w czasie rzeczywistym.', 'Every lesson takes place online, in real time.', 'Ogni lezione si svolge online, in tempo reale.') },
@@ -185,32 +202,38 @@
     ],
 
     onas: {
-      tekst: L('TALQO to szkoła językowa online. Uczymy angielskiego, niemieckiego i włoskiego – dzieci, młodzież, studentów, dorosłych, seniorów i zespoły firmowe.\n\nNajważniejsze są dla nas: jakość i staranność, doświadczenie, uczciwość oraz indywidualne podejście – w przystępnej cenie.\n\n[DO UZUPEŁNIENIA: historia szkoły, doświadczenie i kilka zdań o zespole]',
-        'TALQO is an online language school. We teach English, German and Italian – to children, teenagers, students, adults, seniors and company teams.\n\nWhat matters most to us: quality and care, experience, honesty and an individual approach – at an accessible price.\n\n[TO BE COMPLETED: the school’s story, experience and a few sentences about the team]',
-        'TALQO è una scuola di lingue online. Insegniamo inglese, tedesco e italiano a bambini, ragazzi, studenti, adulti, senior e team aziendali.\n\nPer noi contano soprattutto: qualità e cura, esperienza, onestà e un approccio individuale, a un prezzo accessibile.\n\n[DA COMPLETARE: storia della scuola, esperienza e alcune frasi sul team]'),
-      src1: '', alt1: L('lektorka prowadząca lekcję online przy biurku', 'a teacher giving an online lesson at her desk', 'un’insegnante che tiene una lezione online alla scrivania'),
-      src2: '', alt2: L('notatki i słownik na jasnym blacie', 'notes and a dictionary on a light desk', 'appunti e un dizionario su un piano chiaro')
+      tekst: L('TALQO to szkoła językowa online. Uczymy angielskiego, niemieckiego i włoskiego – dzieci, młodzież, studentów, dorosłych, seniorów i zespoły firmowe.\n\nNajważniejsze są dla nas: jakość i staranność, doświadczenie, uczciwość oraz indywidualne podejście – w przystępnej cenie.\n\nZa każdym kursem stoi lektor, który zna Państwa cel: czy to egzamin, awans, czy wymarzona podróż. Dlatego zaczynamy od rozmowy i testu poziomującego, a dopiero potem proponujemy plan nauki.',
+        'TALQO is an online language school. We teach English, German and Italian – to children, teenagers, students, adults, seniors and company teams.\n\nWhat matters most to us: quality and care, experience, honesty and an individual approach – at an accessible price.\n\nBehind every course there is a teacher who knows your goal: an exam, a promotion or a dream trip. That is why we start with a conversation and a placement test, and only then propose a learning plan.',
+        'TALQO è una scuola di lingue online. Insegniamo inglese, tedesco e italiano a bambini, ragazzi, studenti, adulti, senior e team aziendali.\n\nPer noi contano soprattutto: qualità e cura, esperienza, onestà e un approccio individuale, a un prezzo accessibile.\n\nDietro ogni corso c’è un insegnante che conosce il Suo obiettivo: un esame, una promozione o il viaggio dei sogni. Per questo partiamo da un colloquio e da un test di livello, e solo dopo proponiamo un piano di studio.'),
+      src1: U('1758876020491-9560594ec362'), alt1: L('uśmiechnięta kobieta pracująca przy laptopie', 'a smiling woman working at a laptop', 'una donna sorridente che lavora al portatile'),
+      src2: U('1772396867158-e26d9e6256b2', 700), alt2: L('otwarty notes z długopisem na drewnianym biurku', 'an open notebook with a pen on a wooden desk', 'un taccuino aperto con una penna su una scrivania di legno')
     },
     wyrozniki: [
-      { id: 'w1', tytul: L('Kwalifikacje kadry', 'Qualified teachers', 'Insegnanti qualificati'), opis: todo('wykształcenie i doświadczenie lektorów', 'teachers’ education and experience', 'formazione ed esperienza degli insegnanti') },
-      { id: 'w2', tytul: L('Certyfikaty i akredytacje', 'Certificates and accreditations', 'Certificati e accreditamenti'), opis: todo('posiadane certyfikaty i akredytacje', 'certificates and accreditations held', 'certificati e accreditamenti posseduti') },
+      { id: 'w1', tytul: L('Kwalifikacje kadry', 'Qualified teachers', 'Insegnanti qualificati'), opis: L('Lektorzy z wykształceniem filologicznym i przygotowaniem do nauczania.', 'Teachers with language degrees and teaching qualifications.', 'Insegnanti laureati in lingue e abilitati all’insegnamento.') },
+      { id: 'w2', tytul: L('Certyfikaty i akredytacje', 'Certificates and accreditations', 'Certificati e accreditamenti'), opis: L('Po każdym etapie nauki wystawiamy zaświadczenie z opisem osiągniętego poziomu.', 'After each stage we issue a certificate describing the level achieved.', 'Al termine di ogni fase rilasciamo un attestato con il livello raggiunto.') },
       { id: 'w3', tytul: L('Test poziomujący', 'Placement test', 'Test di livello'), opis: L('Przed rozpoczęciem nauki sprawdzamy poziom, aby dobrać odpowiedni kurs.', 'Before lessons begin we check your level to choose the right course.', 'Prima di iniziare verifichiamo il livello per scegliere il corso giusto.') },
       { id: 'w4', tytul: L('Indywidualne podejście', 'Individual approach', 'Approccio individuale'), opis: L('Cel nauki ustalamy z każdą osobą osobno.', 'We agree the learning goal with each person individually.', 'Definiamo l’obiettivo di studio con ogni persona singolarmente.') }
     ],
-    certyfikaty: [],
+    certyfikaty: [
+      { id: 'ce1', tytul: L('Zaświadczenie ukończenia kursu', 'Course completion certificate', 'Attestato di fine corso'), opis: L('Z opisem poziomu według skali CEFR (A1–C1).', 'With a description of the level on the CEFR scale (A1–C1).', 'Con la descrizione del livello secondo il QCER (A1–C1).') },
+      { id: 'ce2', tytul: L('Przygotowanie do egzaminów zewnętrznych', 'Preparation for external exams', 'Preparazione agli esami esterni'), opis: L('IELTS, Cambridge English, matura i egzamin ósmoklasisty.', 'IELTS, Cambridge English, matura and the eighth-grade exam.', 'IELTS, Cambridge English, maturità ed esame di terza media.') }
+    ],
 
     pakiety: [
-      { id: 'p1', nazwa: todo('nazwa pakietu 1', 'package 1 name', 'nome del pacchetto 1'), opis: todo('liczba lekcji, czas trwania, forma zajęć', 'number of lessons, duration, format', 'numero di lezioni, durata, formula'), cena: todo('cena', 'price', 'prezzo'), wyrozniony: false },
-      { id: 'p2', nazwa: todo('nazwa pakietu 2', 'package 2 name', 'nome del pacchetto 2'), opis: todo('liczba lekcji, czas trwania, forma zajęć', 'number of lessons, duration, format', 'numero di lezioni, durata, formula'), cena: todo('cena', 'price', 'prezzo'), wyrozniony: true },
-      { id: 'p3', nazwa: todo('nazwa pakietu 3', 'package 3 name', 'nome del pacchetto 3'), opis: todo('liczba lekcji, czas trwania, forma zajęć', 'number of lessons, duration, format', 'numero di lezioni, durata, formula'), cena: todo('cena', 'price', 'prezzo'), wyrozniony: false }
+      { id: 'p1', nazwa: L('Start', 'Start', 'Start'), opis: L('4 lekcje ONE po 60 minut. Na dobry początek lub odświeżenie języka.', '4 ONE lessons of 60 minutes. For a good start or a language refresh.', '4 lezioni ONE da 60 minuti. Per iniziare bene o rinfrescare la lingua.'), cena: L('480 zł', 'PLN 480', '480 PLN'), wyrozniony: false },
+      { id: 'p2', nazwa: L('Regular', 'Regular', 'Regular'), opis: L('8 lekcji ONE po 60 minut. Systematyczna nauka raz lub dwa razy w tygodniu.', '8 ONE lessons of 60 minutes. Regular learning once or twice a week.', '8 lezioni ONE da 60 minuti. Studio regolare una o due volte a settimana.'), cena: L('920 zł', 'PLN 920', '920 PLN'), wyrozniony: true },
+      { id: 'p3', nazwa: L('Intensive', 'Intensive', 'Intensive'), opis: L('16 lekcji ONE po 60 minut. Dla osób z konkretnym terminem: egzamin, wyjazd, nowa praca.', '16 ONE lessons of 60 minutes. For people with a deadline: an exam, a trip, a new job.', '16 lezioni ONE da 60 minuti. Per chi ha una scadenza: un esame, un viaggio, un nuovo lavoro.'), cena: L('1 760 zł', 'PLN 1,760', '1 760 PLN'), wyrozniony: false }
     ],
     cennik: [
-      { id: 'c1', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('ONE – lekcja indywidualna', 'ONE – individual lesson', 'ONE – lezione individuale'), dopisek: L('1:1 z lektorem', '1:1 with a teacher', '1:1 con insegnante'), czas: TODO, cena: TODO },
-      { id: 'c2', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('DUO – lekcja w parze', 'DUO – lesson for two', 'DUO – lezione in coppia'), dopisek: L('cena za osobę', 'price per person', 'prezzo a persona'), czas: TODO, cena: TODO },
-      { id: 'c3', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('EGZAMINY – lekcja przygotowująca', 'EXAMS – preparation lesson', 'ESAMI – lezione di preparazione'), dopisek: L('', '', ''), czas: TODO, cena: TODO },
-      { id: 'c4', kategoria: L('Dla firm', 'For companies', 'Per aziende'), nazwa: L('BUSINESS – kurs dla firmy', 'BUSINESS – company course', 'BUSINESS – corso aziendale'), dopisek: L('wycena indywidualna', 'individual quote', 'preventivo individuale'), czas: L('', '', ''), cena: L('wycena', 'on request', 'su richiesta') }
+      { id: 'c1', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('ONE – lekcja indywidualna', 'ONE – individual lesson', 'ONE – lezione individuale'), dopisek: L('1:1 z lektorem', '1:1 with a teacher', '1:1 con insegnante'), czas: L('60 min', '60 min', '60 min'), cena: L('125 zł', 'PLN 125', '125 PLN') },
+      { id: 'c2', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('DUO – lekcja w parze', 'DUO – lesson for two', 'DUO – lezione in coppia'), dopisek: L('cena za osobę', 'price per person', 'prezzo a persona'), czas: L('60 min', '60 min', '60 min'), cena: L('80 zł', 'PLN 80', '80 PLN') },
+      { id: 'c3', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('EGZAMINY – lekcja przygotowująca', 'EXAMS – preparation lesson', 'ESAMI – lezione di preparazione'), dopisek: L('IELTS, Cambridge, matura, egzamin ósmoklasisty', 'IELTS, Cambridge, matura, eighth-grade exam', 'IELTS, Cambridge, maturità, esame di terza media'), czas: L('60 min', '60 min', '60 min'), cena: L('135 zł', 'PLN 135', '135 PLN') },
+      { id: 'c5', kategoria: L('Lekcje pojedyncze', 'Single lessons', 'Lezioni singole'), nazwa: L('Zajęcia dla przedszkolaków', 'Lessons for preschool children', 'Lezioni per bambini in età prescolare'), dopisek: L('krótsza forma dla najmłodszych', 'a shorter format for the youngest', 'formula più breve per i più piccoli'), czas: L('30 min', '30 min', '30 min'), cena: L('70 zł', 'PLN 70', '70 PLN') },
+      { id: 'c4', kategoria: L('Dla firm', 'For companies', 'Per aziende'), nazwa: L('BUSINESS – kurs dla firmy', 'BUSINESS – company course', 'BUSINESS – corso aziendale'), dopisek: L('zajęcia indywidualne lub grupowe', 'individual or group lessons', 'lezioni individuali o di gruppo'), czas: L('60 lub 90 min', '60 or 90 min', '60 o 90 min'), cena: L('wycena', 'on request', 'su richiesta') }
     ],
-    cennikUwaga: todo('aktualny cennik zostanie wpisany po przesłaniu pliku przez szkołę', 'current prices will be entered once the school sends its price list', 'i prezzi aggiornati saranno inseriti dopo l’invio del listino da parte della scuola'),
+    cennikUwaga: L('Ceny brutto. Pakiet należy wykorzystać w ciągu 3 miesięcy od pierwszej lekcji. Lekcję można bezpłatnie przełożyć do 24 godzin przed terminem.',
+      'Prices include VAT. A package must be used within 3 months of the first lesson. A lesson can be rescheduled free of charge up to 24 hours in advance.',
+      'Prezzi IVA inclusa. Il pacchetto va utilizzato entro 3 mesi dalla prima lezione. La lezione può essere spostata gratuitamente fino a 24 ore prima.'),
 
     kroki: [
       { id: 'kr1', tytul: L('Zapytanie o termin', 'Request a date', 'Richiesta di una data'), opis: L('Wypełniają Państwo krótki formularz „Poproś o termin” – wystarczy język i preferowana pora zajęć.', 'You fill in the short “Request a date” form – just the language and your preferred lesson time.', 'Compila il breve modulo «Richieda una data»: bastano la lingua e l’orario preferito.') },
@@ -226,16 +249,20 @@
 
     bezpieczenstwo: [
       { id: 'b1', tytul: L('Ochrona danych osobowych', 'Personal data protection', 'Protezione dei dati personali'), opis: L('Dane przetwarzamy zgodnie z RODO i wyłącznie w celu obsługi zapytań oraz zajęć. Szczegóły opisuje polityka prywatności.', 'We process data in line with the GDPR and only to handle enquiries and lessons. Details are set out in the privacy policy.', 'Trattiamo i dati nel rispetto del GDPR e solo per gestire richieste e lezioni. I dettagli sono nell’informativa sulla privacy.') },
-      { id: 'b2', tytul: L('Zajęcia dzieci i młodzieży', 'Lessons for children and teenagers', 'Lezioni per bambini e ragazzi'), opis: todo('zasady kontaktu z rodzicami, zgody opiekunów, standardy ochrony małoletnich', 'rules for contact with parents, guardian consent, child protection standards', 'regole di contatto con i genitori, consensi dei tutori, standard di tutela dei minori') },
-      { id: 'b3', tytul: L('Platforma do zajęć', 'Lesson platform', 'Piattaforma per le lezioni'), opis: todo('z jakiego narzędzia korzysta szkoła i czy lekcje są nagrywane', 'which tool the school uses and whether lessons are recorded', 'quale strumento utilizza la scuola e se le lezioni vengono registrate') }
+      { id: 'b2', tytul: L('Zajęcia dzieci i młodzieży', 'Lessons for children and teenagers', 'Lezioni per bambini e ragazzi'), opis: L('Zapisu niepełnoletniego uczestnika dokonuje rodzic lub opiekun. Rodzic może być obecny podczas lekcji, a kontakt poza zajęciami odbywa się wyłącznie z opiekunem.', 'A minor is enrolled by a parent or guardian. A parent may be present during the lesson, and contact outside lessons takes place only with the guardian.', 'L’iscrizione di un minore è effettuata da un genitore o tutore. Il genitore può assistere alla lezione e i contatti fuori lezione avvengono solo con il tutore.') },
+      { id: 'b3', tytul: L('Bezpieczne spotkania online', 'Safe online meetings', 'Incontri online sicuri'), opis: L('Na lekcję wchodzi się przez indywidualny link z poczekalnią. Zajęć nie nagrywamy bez wyraźnej zgody uczestnika lub opiekuna.', 'Lessons are joined through an individual link with a waiting room. We do not record lessons without the explicit consent of the participant or guardian.', 'Alla lezione si accede tramite un link individuale con sala d’attesa. Non registriamo le lezioni senza il consenso esplicito del partecipante o del tutore.') }
     ],
     platnosci: [
-      { id: 'pl1', tytul: todo('metoda płatności 1, np. przelew', 'payment method 1, e.g. bank transfer', 'metodo di pagamento 1, ad es. bonifico'), opis: L('', '', '') },
-      { id: 'pl2', tytul: todo('metoda płatności 2', 'payment method 2', 'metodo di pagamento 2'), opis: L('', '', '') },
-      { id: 'pl3', tytul: L('Faktury dla firm', 'Invoices for companies', 'Fatture per aziende'), opis: todo('zasady wystawiania faktur', 'invoicing rules', 'modalità di fatturazione') }
+      { id: 'pl1', tytul: L('Przelew bankowy', 'Bank transfer', 'Bonifico bancario'), opis: L('Na podstawie potwierdzenia zamówienia lub faktury.', 'On the basis of an order confirmation or invoice.', 'Sulla base della conferma d’ordine o della fattura.') },
+      { id: 'pl2', tytul: L('BLIK i szybkie płatności online', 'BLIK and fast online payments', 'BLIK e pagamenti online rapidi'), opis: L('Link do płatności wysyłamy e-mailem.', 'We send a payment link by e-mail.', 'Inviamo il link di pagamento via e-mail.') },
+      { id: 'pl3', tytul: L('Faktury dla firm', 'Invoices for companies', 'Fatture per aziende'), opis: L('Wystawiamy faktury z odroczonym terminem płatności dla kursów BUSINESS.', 'We issue invoices with deferred payment terms for BUSINESS courses.', 'Emettiamo fatture con pagamento differito per i corsi BUSINESS.') }
     ],
 
-    opinie: [],
+    opinie: [
+      { id: 'op1', autor: 'Przykładowa opinia 1', ocena: '5', usluga: L('ONE · angielski', 'ONE · English', 'ONE · inglese'), tresc: L('[PRZYKŁAD — do zastąpienia prawdziwą opinią] Lekcje są konkretne i dopasowane do mojej pracy. Po trzech miesiącach prowadzę spotkania po angielsku bez stresu.', '[EXAMPLE — to be replaced with a real review] The lessons are focused and tailored to my job. After three months I run meetings in English without stress.', '[ESEMPIO — da sostituire con una recensione reale] Le lezioni sono concrete e adatte al mio lavoro. Dopo tre mesi conduco riunioni in inglese senza stress.') },
+      { id: 'op2', autor: 'Przykładowa opinia 2', ocena: '5', usluga: L('EGZAMINY · matura', 'EXAMS · matura', 'ESAMI · maturità'), tresc: L('[PRZYKŁAD — do zastąpienia prawdziwą opinią] Córka przygotowywała się do matury rozszerzonej. Dobra organizacja, jasny plan i stały kontakt z lektorem.', '[EXAMPLE — to be replaced with a real review] My daughter prepared for the extended matura exam. Good organisation, a clear plan and regular contact with the teacher.', '[ESEMPIO — da sostituire con una recensione reale] Mia figlia si è preparata alla maturità avanzata. Buona organizzazione, piano chiaro e contatto costante con l’insegnante.') },
+      { id: 'op3', autor: 'Przykładowa opinia 3', ocena: '5', usluga: L('DUO · włoski', 'DUO · Italian', 'DUO · italiano'), tresc: L('[PRZYKŁAD — do zastąpienia prawdziwą opinią] Uczymy się z mężem przed wyjazdem do Włoch. Zajęcia w parze są swobodne i pełne rozmowy.', '[EXAMPLE — to be replaced with a real review] My husband and I are learning before a trip to Italy. Lessons for two are relaxed and full of conversation.', '[ESEMPIO — da sostituire con una recensione reale] Io e mio marito studiamo prima di un viaggio in Italia. Le lezioni in coppia sono rilassate e piene di conversazione.') }
+    ],
     opiniePodsum: { srednia: '', liczba: '', link: '' },
 
     faq: [
@@ -254,12 +281,12 @@
     ],
 
     kontakt: {
-      telefon: '', email: '', whatsapp: '', messenger: '', instagram: '', facebook: '',
+      telefon: '', email: 'kontakt@talqo.pl', whatsapp: '', messenger: 'talqo', instagram: 'talqo', facebook: 'talqo',
       googleProfil: '', rezerwacja: ''
     },
     godziny: {
       potwierdzone: false,
-      uwaga: todo('godziny kontaktu do potwierdzenia przez szkołę', 'contact hours to be confirmed by the school', 'orari di contatto da confermare da parte della scuola'),
+      uwaga: L('Na wiadomości wysłane po godzinach odpowiadamy następnego dnia roboczego.', 'Messages sent outside these hours are answered on the next working day.', 'Ai messaggi inviati fuori orario rispondiamo il giorno lavorativo successivo.'),
       dni: [
         { otw: true, od: '09:00', 'do': '17:00' }, { otw: true, od: '09:00', 'do': '17:00' },
         { otw: true, od: '09:00', 'do': '17:00' }, { otw: true, od: '09:00', 'do': '17:00' },
@@ -304,7 +331,7 @@
       eName: 'Proszę podać imię i nazwisko (min. 3 znaki).', eEmail: 'Proszę podać poprawny adres e-mail.', ePhone: 'Numer telefonu: 9–15 cyfr, opcjonalnie z „+”.',
       eMsg: 'Proszę wpisać wiadomość (min. 10 znaków).', eCap: 'Wynik działania jest nieprawidłowy.', eConsent: 'Zgoda jest wymagana, abyśmy mogli odpowiedzieć.', eFast: 'Formularz wysłano zbyt szybko. Proszę spróbować za chwilę.',
       nEmail: 'Adres e-mail', nConsent: 'Zgadzam się na otrzymywanie newslettera TALQO na podany adres e-mail.', nSend: 'Zapisz mnie', nOk: 'Dziękujemy. Adres został zapisany do newslettera.',
-      policy: 'Polityka prywatności', admin: 'Panel administratora', top: 'Do góry', sections: 'Na stronie', contact: 'Kontakt', follow: 'Znajdź nas', made: 'Realizacja',
+      demo: 'Wersja demonstracyjna strony: ceny, opinie i część treści są przykładowe.', policy: 'Polityka prywatności', admin: 'Panel administratora', top: 'Do góry', sections: 'Na stronie', contact: 'Kontakt', follow: 'Znajdź nas', made: 'Realizacja',
       googleProfile: 'Profil Firmy w Google', rights: 'Wszelkie prawa zastrzeżone.', phone: 'Telefon', call: 'Zadzwoń', write: 'Napisz', ticker: 'Komunikaty', slide: 'Zdjęcie',
       cookieTxt: 'Za Państwa zgodą włączymy anonimowe statystyki odwiedzin (Google Analytics). Bez zgody nie zbieramy żadnych danych statystycznych.', cookieYes: 'Zgadzam się', cookieNo: 'Nie zgadzam się',
       emailTodo: '[DO UZUPEŁNIENIA: adres e-mail szkoły]', linkTodo: '[LINK DO UZUPEŁNIENIA]', noscript: 'Formularz wymaga włączonej obsługi JavaScript.'
@@ -329,7 +356,7 @@
       eName: 'Please enter your full name (min. 3 characters).', eEmail: 'Please enter a valid e-mail address.', ePhone: 'Phone number: 9–15 digits, optionally with “+”.',
       eMsg: 'Please enter a message (min. 10 characters).', eCap: 'The answer is incorrect.', eConsent: 'Consent is required so that we can reply.', eFast: 'The form was sent too quickly. Please try again in a moment.',
       nEmail: 'E-mail address', nConsent: 'I agree to receive the TALQO newsletter at the address provided.', nSend: 'Subscribe', nOk: 'Thank you. Your address has been added to the newsletter.',
-      policy: 'Privacy policy', admin: 'Admin panel', top: 'Back to top', sections: 'On this page', contact: 'Contact', follow: 'Find us', made: 'Website by',
+      demo: 'Demo version of the site: prices, reviews and some content are examples.', policy: 'Privacy policy', admin: 'Admin panel', top: 'Back to top', sections: 'On this page', contact: 'Contact', follow: 'Find us', made: 'Website by',
       googleProfile: 'Google Business Profile', rights: 'All rights reserved.', phone: 'Phone', call: 'Call', write: 'Write', ticker: 'Announcements', slide: 'Photo',
       cookieTxt: 'With your consent we will enable anonymous visit statistics (Google Analytics). Without consent we collect no statistical data.', cookieYes: 'I agree', cookieNo: 'I do not agree',
       emailTodo: '[TO BE COMPLETED: school e-mail address]', linkTodo: '[TO BE COMPLETED: link]', noscript: 'The form requires JavaScript to be enabled.'
@@ -354,7 +381,7 @@
       eName: 'Inserisca nome e cognome (min. 3 caratteri).', eEmail: 'Inserisca un indirizzo e-mail valido.', ePhone: 'Numero di telefono: 9–15 cifre, facoltativamente con «+».',
       eMsg: 'Inserisca un messaggio (min. 10 caratteri).', eCap: 'Il risultato non è corretto.', eConsent: 'Il consenso è necessario per poterLe rispondere.', eFast: 'Il modulo è stato inviato troppo rapidamente. Riprovi tra un momento.',
       nEmail: 'Indirizzo e-mail', nConsent: 'Acconsento a ricevere la newsletter TALQO all’indirizzo indicato.', nSend: 'Iscrivimi', nOk: 'Grazie. L’indirizzo è stato aggiunto alla newsletter.',
-      policy: 'Informativa sulla privacy', admin: 'Pannello di amministrazione', top: 'Torna su', sections: 'In questa pagina', contact: 'Contatti', follow: 'Ci trova su', made: 'Realizzazione',
+      demo: 'Versione dimostrativa del sito: prezzi, recensioni e parte dei contenuti sono esempi.', policy: 'Informativa sulla privacy', admin: 'Pannello di amministrazione', top: 'Torna su', sections: 'In questa pagina', contact: 'Contatti', follow: 'Ci trova su', made: 'Realizzazione',
       googleProfile: 'Profilo dell’attività su Google', rights: 'Tutti i diritti riservati.', phone: 'Telefono', call: 'Chiama', write: 'Scrivi', ticker: 'Avvisi', slide: 'Foto',
       cookieTxt: 'Con il Suo consenso attiveremo statistiche anonime delle visite (Google Analytics). Senza consenso non raccogliamo alcun dato statistico.', cookieYes: 'Acconsento', cookieNo: 'Non acconsento',
       emailTodo: '[DA COMPLETARE: indirizzo e-mail della scuola]', linkTodo: '[DA COMPLETARE: link]', noscript: 'Il modulo richiede JavaScript attivo.'
@@ -411,11 +438,17 @@
   R.ICONS = ICONS;
   function icon(n) { return '<svg class="ico" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">' + (ICONS[n] || ICONS.ksiazka) + '</svg>'; }
 
+  var BASE = './';
+  function fix(u) { return /^(https?:|data:|\/)/.test(u) ? u : BASE + u; }
+  R.fix = function (u, base) { return /^(https?:|data:|\/)/.test(u || '') ? u : (base || './') + u; };
+  var FLAGI = { gb: 1, de: 1, it: 1 };
+  R.FLAGI = FLAGI;
+  function flaga(k) { return k.flaga && FLAGI[k.flaga] ? '<img class="flag" src="' + BASE + 'flagi/' + k.flaga + '.svg" alt="" width="32" height="24" loading="lazy" decoding="async">' : '<span class="lg" aria-hidden="true">' + esc(k.skrot) + '</span>'; }
   /* Zdjęcie albo neutralne tło zastępcze z opisem [ZDJĘCIE: …] */
   function img(src, alt, w, h, lang, eager) {
     var a = esc(alt || '');
     if (!src) return '<div class="ph" role="img" aria-label="' + a + '" style="aspect-ratio:' + w + '/' + h + '"><span class="ph-t">[' + ui(lang).photo + ': ' + a + ']</span></div>';
-    return '<div class="ph" style="aspect-ratio:' + w + '/' + h + '"><img src="' + esc(src) + '" alt="' + a + '" width="' + w + '" height="' + h + '" ' + (eager ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" onerror="this.remove()"></div>';
+    return '<div class="ph" style="aspect-ratio:' + w + '/' + h + '"><img src="' + esc(fix(src)) + '" alt="' + a + '" width="' + w + '" height="' + h + '" ' + (eager ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" onerror="this.remove()"></div>';
   }
 
   /* ---------- treści czasowe ---------- */
@@ -497,7 +530,7 @@
   function wrapSek(id, st, lang, ctx, inner, cls) {
     var s = findSek(st, id), pv = ctx.preview, tw = t(s.wstep, lang);
     return '<section ' + (pv ? '' : 'id="' + id + '" aria-labelledby="h-' + id + '" ') + 'class="sek sek-' + id + (cls ? ' ' + cls : '') + '" data-sek="' + id + '"><div class="wrap">' +
-      '<header class="sek-head"><h2' + (pv ? '' : ' id="h-' + id + '"') + f('sek.' + id + '.tytul') + '>' + inl(t(s.tytul, lang)) + '</h2>' +
+      '<header class="sek-head">' + (id === 'magazyn' ? '<p class="eyebrow">' + esc(st.firma.nazwa + ' ' + t(s.etykieta, lang)) + '</p>' : '') + '<h2' + (pv ? '' : ' id="h-' + id + '"') + f('sek.' + id + '.tytul') + '>' + inl(t(s.tytul, lang)) + '</h2>' +
       (tw ? '<p class="sek-lead"' + f('sek.' + id + '.wstep') + '>' + inl(tw) + '</p>' : '') + '</header>' + inner + '</div></section>';
   }
 
@@ -507,17 +540,19 @@
     '</g><g stroke="#A89886" stroke-width="3" fill="none"><path d="M40 190h460M40 300h460M40 410h460"/></g></g></svg>';
 
   R.hero = function (st, lang, ctx) {
+    BASE = ctx.base || './';
     var u = ui(lang), h = st.hero, pv = ctx.preview, sl = vis(st.slajdy);
     if (ctx.forceId) sl = st.slajdy.filter(function (x) { return !x.ukryty || x.id === ctx.forceId; });
     var slides = sl.map(function (s, i) {
       var a = t(s.alt, lang);
-      return '<div class="slide' + (i === 0 ? ' on' : '') + '" data-item="' + s.id + '"' + f(s.id + '.src') + '>' +
-        (s.src ? '<img src="' + esc(s.src) + '" alt="' + esc(a) + '" width="1040" height="840" ' + (i === 0 ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" onerror="this.remove()">'
+      return '<div class="slide' + (i === 0 ? ' on' : '') + (s.kolaz ? ' slide-k' : '') + '" data-item="' + s.id + '"' + f(s.id + '.src') + '>' +
+        (s.src ? '<img src="' + esc(fix(s.src)) + '" alt="' + esc(a) + '" ' + (s.kolaz ? 'width="1068" height="724" ' : 'width="1040" height="840" ') + (i === 0 ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" onerror="this.remove()">'
           : HERO_ART + '<span class="ph-t" role="img" aria-label="' + esc(a) + '"' + f(s.id + '.alt') + '>[' + u.photo + ': ' + esc(a) + ']</span>') + '</div>';
     }).join('');
+    var kol = !!(sl[0] && sl[0].kolaz && sl[0].src);
     var dots = sl.length > 1 ? '<div class="dots">' + sl.map(function (s, i) { return '<button type="button" data-slide="' + i + '" aria-label="' + u.slide + ' ' + (i + 1) + '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>'; }).join('') + '</div>' : '';
     var kursy = vis(st.kursy).map(function (k) {
-      return '<li><a href="#kursy" data-kurs="' + k.id + '" style="--c:' + esc(k.kolor) + '"><span class="lg" aria-hidden="true">' + esc(k.skrot) + '</span><span>' + esc(t(k.nazwa, lang)) + '</span>' + ARR + '</a></li>';
+      return '<li><a href="#kursy" data-kurs="' + k.id + '" style="--c:' + esc(k.kolor) + '">' + flaga(k) + '<span>' + esc(t(k.nazwa, lang)) + '</span>' + ARR + '</a></li>';
     }).join('');
     var atuty = vis(st.atuty).map(function (a) {
       return '<li data-item="' + a.id + '">' + icon(a.ikona) + '<p><strong' + f(a.id + '.tytul') + '>' + inl(t(a.tytul, lang)) + '</strong><span' + f(a.id + '.opis') + '>' + inl(t(a.opis, lang)) + '</span></p></li>';
@@ -527,8 +562,8 @@
       '<h1' + (pv ? '' : ' id="h-start"') + f('hero.tytul') + '>' + inl(t(h.tytul, lang)) + '</h1>' +
       '<p class="hero-lead"' + f('hero.wstep') + '>' + inl(t(h.wstep, lang)) + '</p>' +
       '<div class="hero-cta"><a class="btn" href="#oferta">' + u.cta1 + ARR + '</a><a class="btn btn-o" href="#metoda">' + u.cta2 + '</a></div></div>' +
-      '<div class="hero-art"><div class="hero-disc" aria-hidden="true"></div><div class="slider" data-slider>' + slides + '</div>' +
-      (t(h.odreczne, lang) ? '<p class="hero-hand"' + f('hero.odreczne') + '>' + inl(t(h.odreczne, lang)) + '</p>' : '') + dots + '</div></div>' +
+      '<div class="hero-art' + (kol ? ' hero-art-k' : '') + '">' + (kol ? '' : '<div class="hero-disc" aria-hidden="true"></div>') + '<div class="slider" data-slider>' + slides + '</div>' +
+      (t(h.odreczne, lang) && !kol ? '<p class="hero-hand"' + f('hero.odreczne') + '>' + inl(t(h.odreczne, lang)) + '</p>' : '') + dots + '</div></div>' +
       '<div class="wrap"><div class="langpick"><p>' + u.pick + '</p><ul>' + kursy + '</ul></div><ul class="atuty">' + atuty + '</ul></div></section>';
   };
 
@@ -553,11 +588,11 @@
   S.kursy = function (st, lang, ctx) {
     var u = ui(lang), list = vis(st.kursy), idp = ctx.preview ? 'pv-' : '', act = ctx.forceId && list.some(function (k) { return k.id === ctx.forceId; }) ? ctx.forceId : (list[0] || {}).id;
     var tabs = list.map(function (k) {
-      return '<button type="button" role="tab" id="' + idp + 'tab-' + k.id + '" aria-controls="' + idp + 'pan-' + k.id + '" aria-selected="' + (k.id === act) + '"' + (k.id === act ? '' : ' tabindex="-1"') + ' data-tab="' + k.id + '" style="--c:' + esc(k.kolor) + '"><span class="lg" aria-hidden="true">' + esc(k.skrot) + '</span>' + esc(t(k.nazwa, lang)) + '</button>';
+      return '<button type="button" role="tab" id="' + idp + 'tab-' + k.id + '" aria-controls="' + idp + 'pan-' + k.id + '" aria-selected="' + (k.id === act) + '"' + (k.id === act ? '' : ' tabindex="-1"') + ' data-tab="' + k.id + '" style="--c:' + esc(k.kolor) + '">' + flaga(k) + esc(t(k.nazwa, lang)) + '</button>';
     }).join('');
     var pans = list.map(function (k) {
       return '<div role="tabpanel" id="' + idp + 'pan-' + k.id + '" aria-labelledby="' + idp + 'tab-' + k.id + '" class="kurs-pan" data-item="' + k.id + '" style="--c:' + esc(k.kolor) + '"' + (k.id === act ? '' : ' hidden') + '>' +
-        '<div class="kurs-txt"><h3' + f(k.id + '.nazwa') + '>' + esc(t(k.nazwa, lang)) + ' online</h3><div class="txt"' + f(k.id + '.opis') + '>' + fmt(t(k.opis, lang)) + '</div>' +
+        '<div class="kurs-txt"><h3' + f(k.id + '.nazwa') + '>' + flaga(k) + esc(t(k.nazwa, lang)) + ' online</h3><div class="txt"' + f(k.id + '.opis') + '>' + fmt(t(k.opis, lang)) + '</div>' +
         '<a class="btn btn-s" href="#kontakt" data-jezyk="' + k.id + '">' + u.askCourse + ' ' + esc(t(k.nazwa, lang).toLowerCase()) + ARR + '</a></div>' +
         '<div class="kurs-img"' + f(k.id + '.src') + '>' + img(k.src, t(k.alt, lang), 720, 480, lang) + '</div></div>';
     }).join('');
@@ -740,7 +775,7 @@
       '<nav aria-label="' + u.sections + '"><p class="ft-t">' + u.sections + '</p><ul class="ft-n">' + nav + '</ul></nav>' +
       '<div><p class="ft-t">' + u.contact + '</p><ul><li' + f('kontakt.email') + '>' + (k.email ? '<a href="' + esc(ln.mail) + '">' + esc(k.email) + '</a>' : '<span class="todo">' + u.emailTodo + '</span>') + '</li>' + (k.telefon ? '<li><a href="' + esc(ln.tel) + '">' + esc(k.telefon) + '</a></li>' : '') + '<li>' + statusHtml(st, lang, ctx) + '</li></ul></div>' +
       '<div><p class="ft-t">' + u.follow + '</p><ul>' + socL + '</ul></div></div>' +
-      '<div class="ft-e"><p>© ' + y + ' ' + esc(st.firma.nazwa + ' ' + t(st.firma.podpis, lang)) + '. ' + u.rights + '</p><p><button type="button" class="aslink" data-polityka>' + u.policy + '</button> · <button type="button" class="aslink" data-panel>' + u.admin + '</button> · ' + u.made + ': <a href="https://stronyaiwroclaw.pl" target="_blank" rel="noopener">Strony AI Wrocław</a></p></div></div>';
+      (st.ustawienia.demo ? '<p class="ft-demo"' + f('ustawienia.demo') + '>' + u.demo + '</p>' : '') + '<div class="ft-e"><p>© ' + y + ' ' + esc(st.firma.nazwa + ' ' + t(st.firma.podpis, lang)) + '. ' + u.rights + '</p><p><button type="button" class="aslink" data-polityka>' + u.policy + '</button> · <button type="button" class="aslink" data-panel>' + u.admin + '</button> · ' + u.made + ': <a href="https://stronyaiwroclaw.pl" target="_blank" rel="noopener">Strony AI Wrocław</a></p></div></div>';
   };
 
   R.fab = function (st, lang, ctx) {
@@ -751,13 +786,14 @@
   };
 
   R.main = function (st, lang, ctx) {
+    BASE = ctx.base || './';
     var o = R.hero(st, lang, ctx);
     st.sekcje.forEach(function (s) { if (S[s.id] && R.sekWidoczna(st, s.id, ctx)) o += S[s.id](st, lang, ctx); });
     return o;
   };
   /* Pojedyncza sekcja — dla podglądu w panelu */
   R.sectionHtml = function (id, st, lang, ctx) {
-    ctx = ctx || {}; ctx.preview = true;
+    ctx = ctx || {}; ctx.preview = true; BASE = ctx.base || './';
     if (id === 'start') return R.hero(st, lang, ctx);
     if (id === 'naglowek') return '<div class="tq-top">' + R.topbar(st, lang, ctx) + '</div><div class="site-h">' + R.header(st, lang, ctx) + '</div>';
     if (id === 'stopka') return '<div class="site-f">' + R.footer(st, lang, ctx) + '</div>';
@@ -1161,8 +1197,8 @@
       pola: [ML('nazwa', 'Nazwa', { req: 1 }), ML('podtytul', 'Podtytuł'), MLA('opis', 'Krótki opis', { rows: 3 }), ML('czas', 'Czas (np. 60 min)'), ML('cena', 'Cena (np. od 120 zł)'), IMG('src', 'Zdjęcie'), ML('alt', 'Opis zdjęcia (dla czytników i Google)'), ML('plakietka', 'Własna plakietka'), BOOL('nowosc', 'Oznacz jako „Nowość”'), SEL('przycisk', 'Przycisk', function () { return [['rez', 'Zarezerwuj termin'], ['zap', 'Zapytaj o ofertę']]; })],
       tytul: function (x) { return tp(x.nazwa); }, info: function (x) { return [tp(x.podtytul), tp(x.czas), tp(x.cena)].filter(Boolean).join(' · '); } },
     kursy: { sek: 'kursy', nazwa: 'Kursy językowe', jeden: 'język', opis: 'Zakładki języków w sekcji „Kursy” oraz lista „Wybierz język” na pierwszym ekranie.', thumb: 'src',
-      nowy: function () { return { skrot: '', kolor: '#4A1F45', nazwa: L3(), opis: L3(), alt: L3(), src: '' }; },
-      pola: [ML('nazwa', 'Nazwa języka', { req: 1 }), TX('skrot', 'Skrót (2 litery, np. EN)'), TX('kolor', 'Kolor zakładki', { type: 'color' }), MLA('opis', 'Opis kursu', { rows: 6 }), IMG('src', 'Zdjęcie'), ML('alt', 'Opis zdjęcia (dla czytników i Google)')],
+      nowy: function () { return { skrot: '', flaga: '', kolor: '#4A1F45', nazwa: L3(), opis: L3(), alt: L3(), src: '' }; },
+      pola: [ML('nazwa', 'Nazwa języka', { req: 1 }), TX('skrot', 'Skrót (2 litery, np. EN)'), SEL('flaga', 'Flaga', function () { return [['', '— bez flagi (kółko ze skrótem) —'], ['gb', 'Wielka Brytania'], ['de', 'Niemcy'], ['it', 'Włochy']]; }), TX('kolor', 'Kolor zakładki', { type: 'color' }), MLA('opis', 'Opis kursu', { rows: 6 }), IMG('src', 'Zdjęcie'), ML('alt', 'Opis zdjęcia (dla czytników i Google)')],
       tytul: function (x) { return tp(x.nazwa); }, info: function (x) { return cut(tp(x.opis), 70); } },
     grupy: Object.assign({ sek: 'kursy', nazwa: 'Dla kogo (grupy)', jeden: 'grupę', opis: 'Rozwijana lista „Dla kogo są kursy?” w sekcji „Kursy”.' }, punkt),
     pakiety: { sek: 'cennik', nazwa: 'Pakiety lekcji', jeden: 'pakiet', opis: 'Karty pakietów nad cennikiem.',
@@ -1174,7 +1210,7 @@
       pola: [ML('kategoria', 'Kategoria (nazwa tabeli)'), ML('nazwa', 'Nazwa', { req: 1 }), ML('dopisek', 'Dopisek'), ML('czas', 'Czas'), ML('cena', 'Cena', { hint: '„od …” w wersji EN zmieni się na „from …”, jeśli pole EN zostanie puste.' })],
       tytul: function (x) { return tp(x.nazwa); }, info: function (x) { return [tp(x.kategoria), tp(x.czas), tp(x.cena)].filter(Boolean).join(' · '); } },
     slajdy: { sek: 'start', nazwa: 'Zdjęcia w nagłówku', jeden: 'zdjęcie', opis: 'Zdjęcia na pierwszym ekranie. Przy kilku zdjęciach zmieniają się co 6 sekund.', thumb: 'src',
-      nowy: function () { return { src: '', alt: L3() }; }, pola: [IMG('src', 'Zdjęcie', { req: 1 }), ML('alt', 'Opis zdjęcia (dla czytników i Google)')],
+      nowy: function () { return { src: '', alt: L3() }; }, pola: [IMG('src', 'Zdjęcie', { req: 1 }), ML('alt', 'Opis zdjęcia (dla czytników i Google)'), BOOL('kolaz', 'Grafika z własnym tłem (kolaż) — pokaż w całości, bez łuku i śliwkowego koła')],
       tytul: function (x) { return cut(tp(x.alt), 60) || 'Zdjęcie'; }, info: function (x) { return x.src ? '' : 'tło zastępcze — brak zdjęcia'; } },
     atuty: { sek: 'start', nazwa: 'Atuty pod przyciskami', jeden: 'atut', opis: 'Cztery krótkie atuty pod pierwszym ekranem.',
       nowy: function () { return { ikona: 'ksiazka', tytul: L3(), opis: L3() }; },
@@ -1213,7 +1249,7 @@
       pola: [TX('kontakt.email', 'E-mail', { type: 'email' }), TX('kontakt.telefon', 'Telefon (puste = nie pokazuj)', { type: 'tel' }), TX('kontakt.whatsapp', 'WhatsApp (numer)'), TX('kontakt.messenger', 'Messenger (nazwa profilu lub link)'), TX('kontakt.instagram', 'Instagram (nazwa profilu lub link)'), TX('kontakt.facebook', 'Facebook (nazwa strony lub link)'), TX('kontakt.googleProfil', 'Link do Profilu Firmy w Google', { type: 'url', sek: 'stopka' }), ML('newsletter.tytul', 'Newsletter — tytuł'), MLA('newsletter.opis', 'Newsletter — opis', { rows: 3 })] },
     polityka: { sek: 'stopka', nazwa: 'Polityka prywatności', opis: 'Treść okna „Polityka prywatności” (otwierane ze stopki i formularza). Znacznik {EMAIL} wstawia adres e-mail szkoły.', pola: [MLA('polityka.tekst', 'Treść', { rows: 18 })] },
     seo: { sek: 'naglowek', nazwa: 'SEO i statystyki', opis: 'Tytuł i opis strony w Google, adres domeny oraz statystyki odwiedzin (uruchamiane dopiero po zgodzie odwiedzającego).',
-      pola: [ML('seo.title', 'Tytuł strony w Google (do ok. 60 znaków)', { req: 1 }), MLA('seo.opis', 'Opis strony w Google (140–160 znaków)', { rows: 3 }), TX('ustawienia.domena', 'Adres domeny (np. https://talqo.pl)', { hint: 'Używany w adresie kanonicznym, hreflang, Open Graph i danych strukturalnych.' }), TX('ustawienia.ga4', 'Identyfikator Google Analytics 4 (G-XXXXXXXXXX)', { hint: 'Puste = statystyki wyłączone, okno zgody się nie pokazuje.' })] }
+      pola: [ML('seo.title', 'Tytuł strony w Google (do ok. 60 znaków)', { req: 1 }), MLA('seo.opis', 'Opis strony w Google (140–160 znaków)', { rows: 3 }), TX('ustawienia.domena', 'Adres domeny (np. https://talqo.pl)', { hint: 'Używany w adresie kanonicznym, hreflang, Open Graph i danych strukturalnych.' }), TX('ustawienia.ga4', 'Identyfikator Google Analytics 4 (G-XXXXXXXXXX)', { hint: 'Puste = statystyki wyłączone, okno zgody się nie pokazuje.' }), BOOL('ustawienia.demo', 'Pokazuj w stopce informację „Wersja demonstracyjna — treści przykładowe”', { sek: 'stopka' })] }
   };
 
   var NAV = [
@@ -1309,7 +1345,7 @@
     }
     if (def.t === 'bool') return '<div class="cmsp-f cmsp-chk"><label><input type="checkbox"' + at + (v ? ' checked' : '') + '> <span>' + esc(def.l) + '</span></label>' + hint + '</div>';
     if (def.t === 'sel') return '<div class="cmsp-f"><label class="cmsp-fl" for="' + id + '">' + esc(def.l) + '</label><select id="' + id + '"' + at + '>' + def.opts().map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(v == null ? '' : v) === String(o[0]) ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>' + hint + '</div>';
-    if (def.t === 'img') return '<div class="cmsp-f cmsp-imgf" data-imgf="' + def.k + '"><p class="cmsp-fl">' + esc(def.l) + req + '</p><div class="cmsp-imgr"><div class="cmsp-thumb">' + (v ? '<img src="' + esc(v) + '" alt="">' : '<span>brak zdjęcia</span>') + '</div><div class="cmsp-imgb">' +
+    if (def.t === 'img') return '<div class="cmsp-f cmsp-imgf" data-imgf="' + def.k + '"><p class="cmsp-fl">' + esc(def.l) + req + '</p><div class="cmsp-imgr"><div class="cmsp-thumb">' + (v ? '<img src="' + esc(R.fix(v, A.base)) + '" alt="">' : '<span>brak zdjęcia</span>') + '</div><div class="cmsp-imgb">' +
       '<label class="cmsp-btn cmsp-up">Wgraj z dysku<input type="file" accept="image/*" class="cmsp-vh" data-up' + at + '></label><button type="button" class="cmsp-btn" data-imgdel' + at + '>Usuń zdjęcie</button>' +
       '<label class="cmsp-url" for="' + id + '">albo adres URL zdjęcia</label><input type="url" id="' + id + '"' + at + ' value="' + esc(/^data:/.test(v || '') ? '' : v || '') + '" placeholder="https://…"></div></div><p class="cmsp-hint">Zdjęcie zostanie automatycznie zmniejszone do 1600 px i zapisane jako JPEG.</p></div>';
     var type = def.type || (def.t === 'date' ? 'date' : def.t === 'time' ? 'time' : 'text');
@@ -1377,7 +1413,7 @@
     h += '<section class="cmsp-card"><div class="cmsp-acts cmsp-actt"><button type="button" class="cmsp-btn cmsp-pri" data-add="' + key + '">+ Dodaj ' + L.jeden + '</button></div>';
     if (!view.length) h += '<p class="cmsp-empty">Brak pozycji. Kliknij „+ Dodaj ' + esc(L.jeden) + '”.</p>';
     else h += '<ul class="cmsp-rows">' + view.map(function (it, i) {
-      var st = rowStatus(L, it), th = L.thumb && it[L.thumb] ? '<img src="' + esc(it[L.thumb]) + '" alt="">' : '<span>' + (i + 1) + '</span>';
+      var st = rowStatus(L, it), th = L.thumb && it[L.thumb] ? '<img src="' + esc(R.fix(it[L.thumb], A.base)) + '" alt="">' : '<span>' + (i + 1) + '</span>';
       return '<li class="cmsp-row' + (it.ukryty ? ' cmsp-dim' : '') + '" data-id="' + it.id + '">' + (L.sort ? '' : '<div class="cmsp-ord"><button type="button" data-mv="-1" aria-label="Przesuń wyżej"' + (i === 0 ? ' disabled' : '') + '>▲</button><button type="button" data-mv="1" aria-label="Przesuń niżej"' + (i === view.length - 1 ? ' disabled' : '') + '>▼</button></div>') +
         '<div class="cmsp-th">' + th + '</div><div class="cmsp-rt"><strong>' + esc(cut(L.tytul(it), 90) || '(bez tytułu)') + '</strong><span>' + esc(L.info(it) || '') + '</span></div>' + (st[0] ? '<span class="cmsp-bdg cmsp-b-' + st[0] + '">' + st[1] + '</span>' : '') +
         '<div class="cmsp-ra"><button type="button" data-hide>' + (it.ukryty ? 'Pokaż' : 'Ukryj') + '</button><button type="button" data-dup>Duplikuj</button><button type="button" data-edit>Edytuj</button><button type="button" data-del>Usuń</button></div></li>';
