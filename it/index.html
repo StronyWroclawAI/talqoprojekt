@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-base="../" data-build="202611102238">
+<html lang="it" data-base="../" data-build="202611102249">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -150,7 +150,8 @@ body{margin:0;background:var(--cream)}
 .tq .atuty strong{display:block;font-weight:600;line-height:1.25}
 .tq .atuty span{font-size:.93rem;color:var(--muted);line-height:1.3;display:block}
 /* sekcje */
-.tq .sek{padding:clamp(3.2rem,7vw,6rem) 0;scroll-margin-top:var(--hdr)}
+/* przewijanie z menu: górny margines sekcji chowa się pod nagłówkiem, tytuł ląduje tuż pod menu */
+.tq .sek{--pad:clamp(3.2rem,7vw,6rem);padding:var(--pad) 0;scroll-margin-top:calc(var(--hdr) - var(--pad) + 1.75rem)}
 .tq .hero{scroll-margin-top:var(--hdr)}
 .tq .sek-sand{background:var(--sand)}
 .tq .sek-plum{background:var(--plum);color:var(--cream)}
@@ -391,7 +392,7 @@ html{scroll-behavior:auto}
 .tq .hero-art-k{margin-right:-1.5rem;margin-left:0}
 }
 </style>
-<script defer src="../assets/talqo.js?v=202611102238"></script>
+<script defer src="../assets/talqo.js?v=202611102249"></script>
 </head>
 <body>
 <a class="skip" href="#tresc">Vai al contenuto</a>
